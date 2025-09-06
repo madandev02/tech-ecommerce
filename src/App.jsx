@@ -75,23 +75,27 @@ const App = () => {
                 </h2>
                 <div className="flex flex-wrap justify-center items-center gap-12 opacity-80">
                   <img
-                    src="/src/assets/apple.png"
+                    src="/images/brands/apple.png"
                     alt="Apple"
                     className="h-14"
                   />
                   <img
-                    src="/src/assets/samsung.png"
+                    src="/images/brands/samsung.png"
                     alt="Samsung"
                     className="h-14"
                   />
                   <img
-                    src="/src/assets/razer.png"
+                    src="/images/brands/razer.png"
                     alt="Razer"
                     className="h-14"
                   />
-                  <img src="/src/assets/sony.png" alt="Sony" className="h-14" />
                   <img
-                    src="/src/assets/intel.png"
+                    src="/images/brands/sony.png"
+                    alt="Sony"
+                    className="h-14"
+                  />
+                  <img
+                    src="/images/brands/intel.png"
                     alt="Intel"
                     className="h-14"
                   />
@@ -144,17 +148,17 @@ const App = () => {
             </h3>
             <div className="flex gap-4 items-center">
               <img
-                src="/src/assets/visa.png"
+                src="/images/payments/visa.png"
                 alt="Visa"
                 className="h-10 object-contain"
               />
               <img
-                src="/src/assets/mastercard.png"
+                src="/images/payments/mastercard.png"
                 alt="Mastercard"
                 className="h-10 object-contain"
               />
               <img
-                src="/src/assets/paypal.png"
+                src="/images/payments/paypal.png"
                 alt="PayPal"
                 className="h-10 object-contain"
               />
