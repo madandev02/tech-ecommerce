@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 // Custom arrows
 const NextArrow = ({ onClick }) => (
   <div
-    className="absolute right-6 top-1/2 transform -translate-y-1/2 cursor-pointer z-10"
+    className="absolute right-6 top-1/2 transform -translate-y-1/2 cursor-pointer z-30"
     onClick={onClick}
   >
     <ArrowRightCircleIcon className="w-12 h-12 text-white hover:text-blue-400 transition" />
@@ -20,7 +20,7 @@ const NextArrow = ({ onClick }) => (
 
 const PrevArrow = ({ onClick }) => (
   <div
-    className="absolute left-6 top-1/2 transform -translate-y-1/2 cursor-pointer z-10"
+    className="absolute left-6 top-1/2 transform -translate-y-1/2 cursor-pointer z-30"
     onClick={onClick}
   >
     <ArrowLeftCircleIcon className="w-12 h-12 text-white hover:text-blue-400 transition" />
@@ -66,16 +66,17 @@ const HeroSlider = () => {
     <div className="relative w-full overflow-hidden z-0">
       <Slider {...settings}>
         {slides.map((slide) => (
-          <div
-            key={slide.id}
-            className="relative h-[60vh] md:h-[70vh] bg-center bg-cover"
-            style={{ backgroundImage: `url(${slide.image})` }}
-          >
+          <div key={slide.id} className="relative h-[60vh] md:h-[70vh]">
+            {/* Imagen de fondo absoluta */}
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
             {/* Overlay */}
-            <div className="absolute inset-0 bg-black bg-opacity-50" />
-
+            <div className="absolute inset-0 bg-black bg-opacity-50 z-10" />
             {/* Texto */}
-            <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-6 z-10 max-w-3xl mx-auto">
+            <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-6 z-20 max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">
                 {slide.title}
               </h2>
