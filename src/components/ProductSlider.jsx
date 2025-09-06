@@ -10,7 +10,7 @@ const NextArrow = ({ onClick }) => (
     className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer z-10"
     onClick={onClick}
   >
-    <div className="w-10 h-10 bg-blue-600 rounded-full flex justify-center items-center hover:bg-blue-700 transition">
+    <div className="w-10 h-10 bg-blue-600 rounded-full flex justify-center items-center hover:bg-blue-700 transition text-white text-xl font-bold">
       &gt;
     </div>
   </div>
@@ -21,7 +21,7 @@ const PrevArrow = ({ onClick }) => (
     className="absolute left-2 top-1/2 transform -translate-y-1/2 cursor-pointer z-10"
     onClick={onClick}
   >
-    <div className="w-10 h-10 bg-blue-600 rounded-full flex justify-center items-center hover:bg-blue-700 transition">
+    <div className="w-10 h-10 bg-blue-600 rounded-full flex justify-center items-center hover:bg-blue-700 transition text-white text-xl font-bold">
       &lt;
     </div>
   </div>
@@ -31,9 +31,9 @@ const ProductSlider = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 600,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 5000,
     slidesToShow: 4,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
@@ -43,8 +43,8 @@ const ProductSlider = () => {
         <ul className="m-0 p-0 flex justify-center gap-2">{dots}</ul>
       </div>
     ),
-    customPaging: () => (
-      <div className="w-5 h-2 rounded-full bg-gray-300 hover:bg-blue-400 transition" />
+    customPaging: (i) => (
+      <div className="w-6 h-2 bg-gray-300 rounded-full hover:bg-blue-500 transition"></div>
     ),
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 3 } },
@@ -63,21 +63,27 @@ const ProductSlider = () => {
 
   return (
     <div className="my-12 px-6">
-      <h2 className="text-3xl font-bold mb-6 text-center">Hot Deals</h2>
+      <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Hot Deals</h2>
       <Slider {...settings}>
         {products.map((product) => (
           <div key={product.id} className="p-3">
-            <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition p-4 flex flex-col items-center">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-40 object-cover rounded-md mb-4"
-              />
-              <h3 className="text-lg font-semibold">{product.name}</h3>
-              <p className="text-blue-600 font-bold">{product.price}</p>
+            <div className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition p-4 flex flex-col items-center cursor-pointer group">
               
+              {/* Product Image */}
+              <div className="w-full h-44 overflow-hidden rounded-xl mb-4">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+
+              {/* Product Info */}
+              <h3 className="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors text-center">{product.name}</h3>
+              <p className="text-blue-600 font-bold text-lg my-1">{product.price}</p>
+
               {/* Stars */}
-              <div className="flex mt-1 mb-2">
+              <div className="flex items-center mt-1 mb-2">
                 {[...Array(5)].map((_, i) => (
                   <SolidStarIcon
                     key={i}
@@ -89,7 +95,8 @@ const ProductSlider = () => {
               {/* Sold info */}
               <p className="text-gray-500 text-sm mb-2">{product.sold} sold</p>
 
-              <button className="mt-2 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+              {/* Add to Cart Button */}
+              <button className="mt-2 px-4 py-1 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700 transition font-medium text-sm">
                 Add to Cart
               </button>
             </div>
