@@ -1,160 +1,95 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import ProductCard from "./components/ProductCard";
+import HeroSlider from "./components/HeroSlider";
+import ProductSlider from "./components/ProductSlider";
 import Categories from "./components/Categories";
-import FeaturedProducts from "./components/FeaturedProducts";
+import NewsLetter from "./components/NewsLetter";
 
-// Products array
-const products = [
-  {
-    id: 1,
-    name: "Gaming Laptop",
-    description: "High performance laptop for gaming and work.",
-    price: 1499.99,
-    image: "/src/assets/laptop.jpg",
-    isNew: true,
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: "Smartphone Pro",
-    description: "Latest smartphone with amazing camera.",
-    price: 999.99,
-    image: "/src/assets/smartphone.jpg",
-    isSale: true,
-    rating: 4,
-  },
-  {
-    id: 3,
-    name: "Wireless Headphones",
-    description: "Noise cancelling, long battery life.",
-    price: 199.99,
-    image: "/src/assets/headphones.jpg",
-    rating: 4,
-  },
-  {
-    id: 4,
-    name: "Mechanical Keyboard",
-    description: "RGB lighting, perfect for gaming.",
-    price: 129.99,
-    image: "/src/assets/keyboard.jpg",
-    rating: 5,
-  },
-  {
-    id: 5,
-    name: "Smart Watch",
-    description: "Track your fitness and notifications.",
-    price: 249.99,
-    image: "/src/assets/smartwatch.jpg",
-    isNew: true,
-    rating: 5,
-  },
-  {
-    id: 6,
-    name: "Gaming Mouse",
-    description: "Ergonomic design with customizable DPI.",
-    price: 79.99,
-    image: "/src/assets/mouse.jpg",
-    rating: 4,
-  },
-];
-
+// App Component
 const App = () => {
   return (
     <div className="font-sans antialiased bg-gray-50 min-h-screen">
       {/* Navbar */}
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-32 px-4 text-center rounded-b-3xl overflow-hidden">
-        {/* Background overlay */}
-        <div className="absolute inset-0 opacity-20">
-          <img
-            src="/src/assets/hero-bg.jpg"
-            alt="Tech background"
-            className="w-full h-full object-cover"
-          />
+      {/* Hero Slider */}
+      <HeroSlider />
+
+      {/* Benefits Section */}
+      <section className="container mx-auto px-6 py-16 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+        <div className="p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition">
+          <h3 className="text-2xl font-bold mb-2">🚚 Free Shipping</h3>
+          <p className="text-gray-500">On all orders over $100</p>
         </div>
-        <div className="relative z-10">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 drop-shadow-lg">
-            Upgrade Your Tech Today
-          </h1>
-          <p className="text-lg md:text-2xl mb-8 drop-shadow-md">
-            Discover the latest gadgets for work, gaming, and lifestyle.
-          </p>
-          <div className="flex justify-center gap-4 flex-wrap">
-            <button className="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition shadow-lg">
-              Shop Now
-            </button>
-            <button className="bg-transparent border border-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition shadow-lg">
-              Learn More
-            </button>
-          </div>
+        <div className="p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition">
+          <h3 className="text-2xl font-bold mb-2">💳 Secure Payment</h3>
+          <p className="text-gray-500">100% safe transactions</p>
+        </div>
+        <div className="p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition">
+          <h3 className="text-2xl font-bold mb-2">📞 24/7 Support</h3>
+          <p className="text-gray-500">We are here to help you</p>
         </div>
       </section>
+
+      {/* Hot Deals / Best Sellers Slider */}
+      <ProductSlider />
 
       {/* Categories Section */}
       <Categories />
 
-      {/* Featured Products */}
-      <FeaturedProducts />
-
-      {/* Products Grid */}
-      <section className="container mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+      {/* Featured Brands */}
+      <section className="container mx-auto px-6 py-16 text-center">
+        <h2 className="text-3xl font-bold mb-10">Trusted by Top Brands</h2>
+        <div className="flex flex-wrap justify-center items-center gap-12 opacity-80">
+          <img src="/src/assets/apple.png" alt="Apple" className="h-14" />
+          <img src="/src/assets/samsung.png" alt="Samsung" className="h-14" />
+          <img src="/src/assets/razer.png" alt="Razer" className="h-14" />
+          <img src="/src/assets/sony.png" alt="Sony" className="h-14" />
+          <img src="/src/assets/intel.png" alt="Intel" className="h-14" />
+        </div>
       </section>
 
+      {/* Newsletter Section */}
+      <NewsLetter />
+
       {/* Footer */}
-      <footer className="bg-gray-900 text-white mt-16">
-        <div className="container mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* About */}
+      <footer className="bg-gray-900 text-white mt-20 rounded-t-3xl">
+        <div className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-12">
+          {/* Store Hours */}
           <div>
-            <h3 className="text-xl font-bold mb-4">TechStore</h3>
-            <p className="text-gray-400">
-              Your one-stop shop for the latest tech gadgets and accessories.
-            </p>
+            <h3 className="text-xl font-bold mb-4">Store Hours</h3>
+            <p className="text-gray-400">Mon - Fri: 9:00 - 20:00</p>
+            <p className="text-gray-400">Sat: 10:00 - 18:00</p>
+            <p className="text-gray-400">Sun: Closed</p>
           </div>
 
-          {/* Links */}
+          {/* Store Address */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li className="hover:text-blue-400 transition cursor-pointer">
-                Home
-              </li>
-              <li className="hover:text-blue-400 transition cursor-pointer">
-                Products
-              </li>
-              <li className="hover:text-blue-400 transition cursor-pointer">
-                About
-              </li>
-              <li className="hover:text-blue-400 transition cursor-pointer">
-                Contact
-              </li>
-            </ul>
+            <h3 className="text-xl font-bold mb-4">Visit Us</h3>
+            <p className="text-gray-400">123 Tech Avenue, Santiago, Chile</p>
           </div>
 
-          {/* Contact */}
+          {/* Payment Methods */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Contact Us</h3>
-            <p className="text-gray-400">support@techstore.com</p>
-            <p className="text-gray-400">+1 (123) 456-7890</p>
-            <div className="flex space-x-4 mt-4">
-              <a href="#" className="hover:text-blue-400 transition">
-                Facebook
-              </a>
-              <a href="#" className="hover:text-blue-400 transition">
-                Twitter
-              </a>
-              <a href="#" className="hover:text-blue-400 transition">
-                Instagram
-              </a>
+            <h3 className="text-xl font-bold mb-4">We Accept</h3>
+            <div className="flex gap-4">
+              <img src="/src/assets/visa.png" alt="Visa" className="h-8" />
+              <img src="/src/assets/mastercard.png" alt="Mastercard" className="h-8" />
+              <img src="/src/assets/paypal.png" alt="PayPal" className="h-8" />
             </div>
           </div>
+
+          {/* Help Center */}
+          <div>
+            <h3 className="text-xl font-bold mb-4">Help Center</h3>
+            <p className="text-gray-400">support@techstore.com</p>
+            <p className="text-gray-400">+56 9 1234 5678</p>
+            <a href="#" className="text-blue-400 hover:underline">
+              FAQ & Support
+            </a>
+          </div>
         </div>
-        <div className="text-center text-gray-500 text-sm py-4 border-t border-gray-700">
+        <div className="text-center text-gray-500 text-sm py-6 border-t border-gray-800">
           &copy; 2025 TechStore. All rights reserved.
         </div>
       </footer>
