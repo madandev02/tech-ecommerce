@@ -5,6 +5,8 @@ import ProductSlider from "./components/ProductSlider";
 import Categories from "./components/Categories";
 import NewsLetter from "./components/NewsLetter";
 import Cart from "./pages/Cart";
+import "swiper/css";
+import "swiper/css/autoplay"
 
 // Pages
 import Home from "./pages/Home";
