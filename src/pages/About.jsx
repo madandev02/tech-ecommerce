@@ -1,9 +1,17 @@
 import React from "react";
+import { AcademicCapIcon, EyeIcon, UsersIcon } from "@heroicons/react/24/solid";
+
+const teamMembers = [
+  { name: "Alice Johnson", role: "CEO", image: "https://via.placeholder.com/100" },
+  { name: "Bob Smith", role: "CTO", image: "https://via.placeholder.com/100" },
+  { name: "Clara Lee", role: "Head of Marketing", image: "https://via.placeholder.com/100" },
+  { name: "David Brown", role: "Lead Developer", image: "https://via.placeholder.com/100" },
+];
 
 const About = () => {
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      {/* Hero section */}
+      {/* Hero Section */}
       <section className="bg-blue-600 text-white py-24 px-6 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">About TechStore</h1>
         <p className="text-lg md:text-xl max-w-2xl mx-auto">
@@ -11,15 +19,19 @@ const About = () => {
         </p>
       </section>
 
-      {/* Our Mission & Vision */}
+      {/* Mission & Vision Section */}
       <section className="container mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        {/* Mission Card */}
+        <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition flex flex-col items-center text-center">
+          <AcademicCapIcon className="w-12 h-12 text-blue-600 mb-4" />
           <h2 className="text-2xl font-bold mb-4 text-blue-600">Our Mission</h2>
           <p className="text-gray-700">
             To provide high-quality tech products at affordable prices, with outstanding customer service.
           </p>
         </div>
-        <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        {/* Vision Card */}
+        <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition flex flex-col items-center text-center">
+          <EyeIcon className="w-12 h-12 text-blue-600 mb-4" />
           <h2 className="text-2xl font-bold mb-4 text-blue-600">Our Vision</h2>
           <p className="text-gray-700">
             To become the leading online store for tech enthusiasts, offering innovation and reliability in every purchase.
@@ -27,7 +39,84 @@ const About = () => {
         </div>
       </section>
 
-      {/* Call to action */}
+      {/* Achievements Section */}
+      <section className="py-16 px-6 bg-white text-center">
+        <h2 className="text-3xl font-bold mb-12 text-gray-800">Our Achievements</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Products Sold */}
+          <div>
+            <p className="text-4xl font-extrabold text-blue-600">500+</p>
+            <p className="text-gray-600">Products Sold</p>
+          </div>
+          {/* Happy Customers */}
+          <div>
+            <p className="text-4xl font-extrabold text-blue-600">10K+</p>
+            <p className="text-gray-600">Happy Customers</p>
+          </div>
+          {/* Years in Business */}
+          <div>
+            <p className="text-4xl font-extrabold text-blue-600">8</p>
+            <p className="text-gray-600">Years in Business</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Team Section */}
+      <section className="py-16 px-6 bg-gray-50 text-center">
+        <h2 className="text-3xl font-bold mb-12 text-gray-800">Our Team</h2>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          {teamMembers.map((member, i) => (
+            <div
+              key={i}
+              className="bg-white p-6 rounded-3xl shadow-lg hover:shadow-2xl transition flex flex-col items-center"
+            >
+              <UsersIcon className="w-12 h-12 text-blue-600 mb-4" />
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-24 h-24 rounded-full object-cover mb-4"
+              />
+              <h3 className="text-xl font-semibold text-gray-800">{member.name}</h3>
+              <p className="text-gray-500">{member.role}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 px-6 bg-white text-center">
+        <h2 className="text-3xl font-bold mb-12 text-gray-800">What Our Customers Say</h2>
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Testimonial 1 */}
+          <div className="bg-white p-6 rounded-3xl shadow-lg hover:shadow-2xl transition">
+            <p className="text-gray-700 mb-4">
+              "TechStore made upgrading my setup so easy! Great products and service."
+            </p>
+            <div className="flex items-center gap-4">
+              <img src="https://via.placeholder.com/50" alt="Client 1" className="w-12 h-12 rounded-full" />
+              <div>
+                <p className="font-semibold text-gray-800">Emily R.</p>
+                <p className="text-yellow-400">⭐⭐⭐⭐⭐</p>
+              </div>
+            </div>
+          </div>
+          {/* Testimonial 2 */}
+          <div className="bg-white p-6 rounded-3xl shadow-lg hover:shadow-2xl transition">
+            <p className="text-gray-700 mb-4">
+              "Fast delivery and excellent customer support. Highly recommended!"
+            </p>
+            <div className="flex items-center gap-4">
+              <img src="https://via.placeholder.com/50" alt="Client 2" className="w-12 h-12 rounded-full" />
+              <div>
+                <p className="font-semibold text-gray-800">Michael T.</p>
+                <p className="text-yellow-400">⭐⭐⭐⭐⭐</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Call-to-Action Section */}
       <section className="bg-blue-50 py-16 text-center">
         <h2 className="text-3xl font-bold mb-4">Ready to upgrade your tech?</h2>
         <a

@@ -1,1 +1,27 @@
 @import 'tailwindcss';
+
+/* Custom scrollbar for Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 8px; /* Thin scrollbar for subtle appearance */
+}
+
+::-webkit-scrollbar-track {
+  background: #e5e5e5; /* Very light gray track for a clean look */
+  border-radius: 10px; /* Rounded edges for smooth style */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1; /* Soft gray thumb for subtle contrast */
+  border-radius: 10px; /* Rounded edges to match the track */
+  border: 2px solid #e5e5e5; /* Creates separation from the track */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8a8a8; /* Slightly darker on hover for interaction feedback */
+}
+
+/* Custom scrollbar for Firefox */
+* {
+  scrollbar-width: thin; /* Makes the scrollbar thinner */
+  scrollbar-color: #c1c1c1 #e5e5e5; /* thumb color / track color */
+}

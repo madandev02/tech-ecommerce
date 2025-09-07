@@ -6,7 +6,7 @@ import Categories from "./components/Categories";
 import NewsLetter from "./components/NewsLetter";
 import Cart from "./pages/Cart";
 import "swiper/css";
-import "swiper/css/autoplay"
+import "swiper/css/autoplay";
 
 // Pages
 import Home from "./pages/Home";
@@ -33,32 +33,56 @@ const App = () => {
               <HeroSlider />
 
               {/* Benefits Section */}
-              <section className="container mx-auto px-6 py-16">
-                <h2 className="text-3xl font-bold text-center mb-12">
+              <section className="container mx-auto px-6 py-20">
+                {/* Section Title */}
+                <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16">
                   Why Shop With Us?
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                  <div className="p-8 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-2xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl flex flex-col items-center">
-                    <span className="text-5xl mb-4">🚚</span>
+
+                {/* Benefits Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+                  {/* Benefit 1 */}
+                  <div className="p-6 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-3xl shadow-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl flex flex-col items-center text-center">
+                    <span className="text-6xl mb-4">🚚</span>
                     <h3 className="text-xl font-bold mb-2">Free Shipping</h3>
-                    <p className="text-center text-white/80">
-                      On all orders over $100
+                    <p className="text-white/80">
+                      On all orders over $100 nationwide.
                     </p>
                   </div>
 
-                  <div className="p-8 bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-2xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl flex flex-col items-center">
-                    <span className="text-5xl mb-4">💳</span>
+                  {/* Benefit 2 */}
+                  <div className="p-6 bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-3xl shadow-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl flex flex-col items-center text-center">
+                    <span className="text-6xl mb-4">💳</span>
                     <h3 className="text-xl font-bold mb-2">Secure Payment</h3>
-                    <p className="text-center text-white/80">
-                      100% safe transactions
+                    <p className="text-white/80">
+                      100% safe and encrypted transactions.
                     </p>
                   </div>
 
-                  <div className="p-8 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl flex flex-col items-center">
-                    <span className="text-5xl mb-4">📞</span>
+                  {/* Benefit 3 */}
+                  <div className="p-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-3xl shadow-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl flex flex-col items-center text-center">
+                    <span className="text-6xl mb-4">📞</span>
                     <h3 className="text-xl font-bold mb-2">24/7 Support</h3>
-                    <p className="text-center text-white/80">
-                      We are here to help you anytime
+                    <p className="text-white/80">
+                      Our experts are ready to help anytime.
+                    </p>
+                  </div>
+
+                  {/* Benefit 4 */}
+                  <div className="p-6 bg-gradient-to-r from-indigo-400 to-blue-500 text-white rounded-3xl shadow-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl flex flex-col items-center text-center">
+                    <span className="text-6xl mb-4">💡</span>
+                    <h3 className="text-xl font-bold mb-2">Latest Tech</h3>
+                    <p className="text-white/80">
+                      We offer the newest gadgets and devices.
+                    </p>
+                  </div>
+
+                  {/* Benefit 5 */}
+                  <div className="p-6 bg-gradient-to-r from-purple-400 to-purple-600 text-white rounded-3xl shadow-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl flex flex-col items-center text-center">
+                    <span className="text-6xl mb-4">🏆</span>
+                    <h3 className="text-xl font-bold mb-2">Best Quality</h3>
+                    <p className="text-white/80">
+                      Premium products from trusted brands.
                     </p>
                   </div>
                 </div>
@@ -72,35 +96,33 @@ const App = () => {
 
               {/* Featured Brands */}
               <section className="container mx-auto px-6 py-16 text-center">
-                <h2 className="text-3xl font-bold mb-10">
+                {/* Section Title */}
+                <h2 className="text-3xl md:text-4xl font-bold mb-12">
                   Trusted by Top Brands
                 </h2>
-                <div className="flex flex-wrap justify-center items-center gap-12 opacity-80">
-                  <img
-                    src="/images/brands/apple.png"
-                    alt="Apple"
-                    className="h-14"
-                  />
-                  <img
-                    src="/images/brands/samsung.png"
-                    alt="Samsung"
-                    className="h-14"
-                  />
-                  <img
-                    src="/images/brands/razer.png"
-                    alt="Razer"
-                    className="h-14"
-                  />
-                  <img
-                    src="/images/brands/sony.png"
-                    alt="Sony"
-                    className="h-14"
-                  />
-                  <img
-                    src="/images/brands/intel.png"
-                    alt="Intel"
-                    className="h-14"
-                  />
+
+                {/* Brands Container */}
+                <div className="flex overflow-x-auto no-scrollbar gap-8 justify-center items-center py-4">
+                  {[
+                    { name: "Apple", src: "/images/brands/apple.png" },
+                    { name: "Samsung", src: "/images/brands/samsung.png" },
+                    { name: "Razer", src: "/images/brands/razer.png" },
+                    { name: "Sony", src: "/images/brands/sony.png" },
+                    { name: "Intel", src: "/images/brands/intel.png" },
+                    { name: "Microsoft", src: "/images/brands/microsoft.png" },
+                    { name: "Logitech", src: "/images/brands/logitech.png" },
+                  ].map((brand, i) => (
+                    <div
+                      key={i}
+                      className="flex-shrink-0 w-28 md:w-32 lg:w-36 p-4 bg-white rounded-xl shadow hover:shadow-2xl transition-transform transform hover:scale-110 cursor-pointer"
+                    >
+                      <img
+                        src={brand.src}
+                        alt={brand.name}
+                        className="w-full h-14 md:h-16 lg:h-20 object-contain mx-auto"
+                      />
+                    </div>
+                  ))}
                 </div>
               </section>
 
@@ -124,7 +146,7 @@ const App = () => {
       <footer className="bg-gray-900 text-white mt-20 pt-16">
         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Store Hours */}
-          <div>
+          <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
             <h3 className="text-xl font-bold mb-6 border-b border-gray-700 pb-2">
               Store Hours
             </h3>
@@ -134,7 +156,7 @@ const App = () => {
           </div>
 
           {/* Visit Us */}
-          <div>
+          <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
             <h3 className="text-xl font-bold mb-6 border-b border-gray-700 pb-2">
               Visit Us
             </h3>
@@ -144,39 +166,43 @@ const App = () => {
           </div>
 
           {/* Payment Methods */}
-          <div>
+          <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
             <h3 className="text-xl font-bold mb-6 border-b border-gray-700 pb-2">
               We Accept
             </h3>
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-4 items-center justify-center">
               <img
                 src="/images/payments/visa.png"
                 alt="Visa"
-                className="h-10 object-contain"
+                className="h-10 object-contain hover:scale-110 transition-transform"
               />
               <img
                 src="/images/payments/mastercard.png"
                 alt="Mastercard"
-                className="h-10 object-contain"
+                className="h-10 object-contain hover:scale-110 transition-transform"
               />
               <img
                 src="/images/payments/paypal.png"
                 alt="PayPal"
-                className="h-10 object-contain"
+                className="h-10 object-contain hover:scale-110 transition-transform"
               />
             </div>
           </div>
 
           {/* Help Center */}
-          <div>
+          <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
             <h3 className="text-xl font-bold mb-6 border-b border-gray-700 pb-2">
               Help Center
             </h3>
-            <p className="text-gray-400 mb-1">support@techstore.com</p>
-            <p className="text-gray-400 mb-2">+56 9 1234 5678</p>
+            <p className="text-gray-400 mb-1 flex items-center gap-2">
+              📧 support@techstore.com
+            </p>
+            <p className="text-gray-400 mb-2 flex items-center gap-2">
+              📞 +56 9 1234 5678
+            </p>
             <a
               href="#"
-              className="text-blue-400 hover:text-blue-500 transition"
+              className="text-blue-400 hover:text-blue-500 transition font-medium"
             >
               FAQ & Support
             </a>
@@ -184,8 +210,9 @@ const App = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="mt-16 border-t border-gray-800 text-gray-500 text-center py-6 text-sm">
-          &copy; 2025 TechStore. All rights reserved.
+        <div className="mt-16 border-t border-gray-800 text-gray-400 text-center py-6 text-sm">
+          &copy; 2025 TechStore. All rights reserved. Designed with ❤️ by
+          TechStore
         </div>
       </footer>
     </div>

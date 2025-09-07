@@ -4,13 +4,13 @@ import { StarIcon as SolidStarIcon } from "@heroicons/react/24/solid";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// Custom arrow components
+// Custom Arrow Components
 const NextArrow = ({ onClick }) => (
   <div
     className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer z-10"
     onClick={onClick}
   >
-    <div className="w-10 h-10 bg-blue-600 rounded-full flex justify-center items-center hover:bg-blue-700 transition text-white text-xl font-bold">
+    <div className="w-10 h-10 bg-blue-600 rounded-full flex justify-center items-center hover:bg-blue-700 transition text-white text-2xl font-bold">
       &gt;
     </div>
   </div>
@@ -21,7 +21,7 @@ const PrevArrow = ({ onClick }) => (
     className="absolute left-2 top-1/2 transform -translate-y-1/2 cursor-pointer z-10"
     onClick={onClick}
   >
-    <div className="w-10 h-10 bg-blue-600 rounded-full flex justify-center items-center hover:bg-blue-700 transition text-white text-xl font-bold">
+    <div className="w-10 h-10 bg-blue-600 rounded-full flex justify-center items-center hover:bg-blue-700 transition text-white text-2xl font-bold">
       &lt;
     </div>
   </div>
@@ -40,11 +40,11 @@ const ProductSlider = () => {
     prevArrow: <PrevArrow />,
     appendDots: (dots) => (
       <div>
-        <ul className="m-0 p-0 flex justify-center gap-2">{dots}</ul>
+        <ul className="m-0 p-0 flex justify-center gap-3">{dots}</ul>
       </div>
     ),
     customPaging: (i) => (
-      <div className="w-6 h-2 bg-gray-300 rounded-full hover:bg-blue-500 transition"></div>
+      <div className="w-6 h-1 bg-gray-300 rounded-full hover:bg-blue-600 transition"></div>
     ),
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 3 } },
@@ -63,11 +63,14 @@ const ProductSlider = () => {
 
   return (
     <div className="my-12 px-6">
-      <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Hot Deals</h2>
+      <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">
+        Hot Deals
+      </h2>
+
       <Slider {...settings}>
         {products.map((product) => (
           <div key={product.id} className="p-3">
-            <div className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition p-4 flex flex-col items-center cursor-pointer group">
+            <div className="bg-white rounded-3xl shadow-md hover:shadow-2xl transition-transform transform hover:-translate-y-1 group cursor-pointer flex flex-col items-center p-4">
               
               {/* Product Image */}
               <div className="w-full h-44 overflow-hidden rounded-xl mb-4">
@@ -79,24 +82,24 @@ const ProductSlider = () => {
               </div>
 
               {/* Product Info */}
-              <h3 className="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors text-center">{product.name}</h3>
+              <h3 className="text-lg font-semibold text-gray-800 group-hover:text-blue-600 text-center transition-colors">{product.name}</h3>
               <p className="text-blue-600 font-bold text-lg my-1">{product.price}</p>
 
               {/* Stars */}
-              <div className="flex items-center mt-1 mb-2">
+              <div className="flex items-center mt-1 mb-2 space-x-1">
                 {[...Array(5)].map((_, i) => (
                   <SolidStarIcon
                     key={i}
-                    className={`w-5 h-5 ${i < product.rating ? "text-yellow-400" : "text-gray-300"}`}
+                    className={`w-5 h-5 ${i < product.rating ? "text-yellow-400" : "text-gray-300"} transition-colors`}
                   />
                 ))}
               </div>
 
               {/* Sold info */}
-              <p className="text-gray-500 text-sm mb-2">{product.sold} sold</p>
+              <p className="text-gray-500 text-sm mb-3">{product.sold} sold</p>
 
               {/* Add to Cart Button */}
-              <button className="mt-2 px-4 py-1 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700 transition font-medium text-sm">
+              <button className="px-5 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700 transition font-medium">
                 Add to Cart
               </button>
             </div>
