@@ -1,18 +1,40 @@
 import React, { useState } from "react";
-import { XMarkIcon, PlusIcon, MinusIcon, ChevronDownIcon, CreditCardIcon, BanknotesIcon, CurrencyDollarIcon, FireIcon, ClockIcon } from "@heroicons/react/24/outline";
+import {
+  XMarkIcon, PlusIcon, MinusIcon, ChevronDownIcon,
+  CreditCardIcon, BanknotesIcon, CurrencyDollarIcon,
+  FireIcon, ClockIcon, ArrowPathIcon, QuestionMarkCircleIcon
+} from "@heroicons/react/24/outline";
+
+// --- Sample related products for recommendation ---
+const relatedProducts = [
+  { id: 101, name: "Gaming Mouse", price: 49, image: "https://via.placeholder.com/150x100" },
+  { id: 102, name: "RGB Mousepad", price: 29, image: "https://via.placeholder.com/150x100" },
+  { id: 103, name: "Gaming Chair", price: 199, image: "https://via.placeholder.com/150x100" }
+];
+
+// --- Payment logos ---
+const paymentLogos = {
+  "Visa": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg",
+  "MasterCard": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg",
+  "PayPal": "https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"
+};
 
 const CartPage = () => {
+  // --- Cart state ---
   const [cartItems, setCartItems] = useState([
-    { id: 1, name: "Gaming Laptop", price: 1200, quantity: 1, image: "https://via.placeholder.com/200x150", stock: 5, discount: 10, hotDeal: true },
-    { id: 2, name: "Wireless Headset", price: 150, quantity: 2, image: "https://via.placeholder.com/200x150", stock: 10 },
-    { id: 3, name: "Mechanical Keyboard", price: 99, quantity: 1, image: "https://via.placeholder.com/200x150", stock: 3, discount: 5 },
+    { id: 1, name: "Gaming Laptop", price: 1200, quantity: 1, images: ["https://via.placeholder.com/200x150", "https://via.placeholder.com/200x150/ff0000"], stock: 5, discount: 10, hotDeal: true },
+    { id: 2, name: "Wireless Headset", price: 150, quantity: 2, images: ["https://via.placeholder.com/200x150"], stock: 10 },
+    { id: 3, name: "Mechanical Keyboard", price: 99, quantity: 1, images: ["https://via.placeholder.com/200x150"], stock: 3, discount: 5 },
   ]);
 
+  // --- Shipping & payment states ---
   const [shipping, setShipping] = useState({ name: "", address: "", city: "", postalCode: "", country: "" });
   const [paymentMethod, setPaymentMethod] = useState("Credit Card");
   const [showShipping, setShowShipping] = useState(true);
   const [showPayment, setShowPayment] = useState(false);
-
+  const [hoveredImage, setHoveredImage] = useState({});
+  
+  // --- Handle quantity changes with animation ---
   const handleQuantityChange = (id, delta) => {
     setCartItems(prev =>
       prev.map(item =>
@@ -21,8 +43,16 @@ const CartPage = () => {
     );
   };
 
-  const handleRemoveItem = (id) => setCartItems(prev => prev.filter(item => item.id !== id));
+  // --- Remove item with fade animation ---
+  const handleRemoveItem = (id) => {
+    const element = document.getElementById(`cart-item-${id}`);
+    if(element){
+      element.classList.add("opacity-0","scale-90","transition","duration-500");
+      setTimeout(() => setCartItems(prev => prev.filter(item => item.id !== id)), 500);
+    }
+  };
 
+  // --- Calculate totals ---
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity * ((100 - (item.discount || 0)) / 100),
     0
@@ -31,41 +61,76 @@ const CartPage = () => {
   const shippingCost = cartItems.length ? 15 : 0;
   const total = subtotal + tax + shippingCost;
 
+  // --- Handle shipping input change ---
   const handleShippingChange = (e) => setShipping({ ...shipping, [e.target.name]: e.target.value });
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12 font-sans">
+      {/* --- Page Title --- */}
       <h2 className="text-4xl font-extrabold text-gray-800 mb-10 text-center">🛒 Shopping Cart</h2>
 
       {cartItems.length === 0 ? (
         <p className="text-center text-gray-500 text-lg">Your cart is empty.</p>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Side */}
+          {/* --- Left Side: Cart Items, Shipping & Payment --- */}
           <div className="lg:col-span-2 space-y-6">
             {cartItems.map(item => (
-              <div key={item.id} className="flex items-center bg-white rounded-3xl shadow-lg p-4 hover:shadow-2xl transition relative group overflow-hidden transform hover:scale-[1.02]">
+              <div
+                id={`cart-item-${item.id}`}
+                key={item.id}
+                className="flex items-center bg-white rounded-3xl shadow-lg p-4 hover:shadow-2xl transition relative group overflow-hidden transform hover:scale-[1.02]"
+                onMouseEnter={() => setHoveredImage({ ...hoveredImage, [item.id]: 1 })}
+                onMouseLeave={() => setHoveredImage({ ...hoveredImage, [item.id]: 0 })}
+              >
+                {/* --- Discount Badge --- */}
                 {item.discount && (
                   <span className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg animate-pulse">-{item.discount}%</span>
                 )}
+                {/* --- Hot Deal Badge --- */}
                 {item.hotDeal && (
                   <span className="absolute top-3 left-24 bg-yellow-400 text-white px-2 py-1 rounded-full text-sm font-bold flex items-center gap-1">
                     <FireIcon className="w-4 h-4" /> Hot Deal
                   </span>
                 )}
+                {/* --- Stock Badge --- */}
                 <span className="absolute top-3 right-3 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
                   {item.quantity}x / {item.stock} in stock
                 </span>
 
-                <div className="w-28 h-28 overflow-hidden rounded-xl shadow-sm">
-                  <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                {/* --- Product Images with mini gallery --- */}
+                <div className="w-28 h-28 overflow-hidden rounded-xl shadow-sm relative">
+                  <img
+                    src={item.images[hoveredImage[item.id] || 0]}
+                    alt={item.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  {item.images.length > 1 && (
+                    <div className="absolute bottom-1 left-1 flex gap-1">
+                      {item.images.map((img, idx) => (
+                        <div
+                          key={idx}
+                          onMouseEnter={() => setHoveredImage({ ...hoveredImage, [item.id]: idx })}
+                          className={`w-6 h-6 border rounded cursor-pointer ${hoveredImage[item.id] === idx ? "border-blue-500" : "border-gray-300"}`}
+                          style={{ backgroundImage: `url(${img})`, backgroundSize: 'cover' }}
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
 
+                {/* --- Product Info --- */}
                 <div className="ml-5 flex-1">
                   <h3 className="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition">{item.name}</h3>
-                  <p className="text-blue-600 font-bold text-lg mt-1">
-                    ${(item.price * ((100 - (item.discount || 0)) / 100)).toFixed(2)}
-                  </p>
+                  <div className="flex items-center gap-1">
+                    <p className="text-blue-600 font-bold text-lg mt-1">
+                      ${(item.price * ((100 - (item.discount || 0)) / 100)).toFixed(2)}
+                    </p>
+                    {item.discount && (
+                      <QuestionMarkCircleIcon className="w-5 h-5 text-gray-400 cursor-pointer" title="Discount applied!" />
+                    )}
+                  </div>
+                  {/* --- Quantity Controls --- */}
                   <div className="flex items-center mt-3 space-x-3">
                     <button onClick={() => handleQuantityChange(item.id, -1)} className="w-9 h-9 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition transform hover:scale-110">
                       <MinusIcon className="w-5 h-5 text-gray-700" />
@@ -77,13 +142,14 @@ const CartPage = () => {
                   </div>
                 </div>
 
+                {/* --- Remove Item Button --- */}
                 <button onClick={() => handleRemoveItem(item.id)} className="ml-4 p-2 text-gray-500 hover:text-red-500 transition transform hover:scale-110">
                   <XMarkIcon className="w-6 h-6" />
                 </button>
               </div>
             ))}
 
-            {/* Shipping Dropdown */}
+            {/* --- Shipping Dropdown --- */}
             <div className="bg-white p-6 rounded-3xl shadow-lg hover:shadow-2xl transition">
               <div className="flex justify-between items-center cursor-pointer" onClick={() => setShowShipping(!showShipping)}>
                 <h3 className="text-2xl font-bold mb-2 text-blue-600 flex items-center gap-2"><ClockIcon className="w-5 h-5 text-blue-600" /> Shipping Address</h3>
@@ -107,7 +173,7 @@ const CartPage = () => {
               )}
             </div>
 
-            {/* Payment Dropdown */}
+            {/* --- Payment Dropdown with logos --- */}
             <div className="bg-white p-6 rounded-3xl shadow-lg hover:shadow-2xl transition">
               <div className="flex justify-between items-center cursor-pointer" onClick={() => setShowPayment(!showPayment)}>
                 <h3 className="text-2xl font-bold mb-2 text-blue-600 flex items-center gap-2"><CreditCardIcon className="w-5 h-5 text-blue-600" /> Payment Method</h3>
@@ -115,27 +181,59 @@ const CartPage = () => {
               </div>
               {showPayment && (
                 <div className="mt-4 space-y-3">
-                  {["Credit Card", "PayPal", "Bank Transfer"].map(method => (
-                    <div key={method} className={`flex items-center p-4 border rounded-xl cursor-pointer transition ${paymentMethod === method ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:bg-gray-50"}`} onClick={() => setPaymentMethod(method)}>
-                      {method === "Credit Card" && <CreditCardIcon className="w-6 h-6 text-blue-600 mr-3" />}
-                      {method === "PayPal" && <CurrencyDollarIcon className="w-6 h-6 text-yellow-500 mr-3" />}
-                      {method === "Bank Transfer" && <BanknotesIcon className="w-6 h-6 text-green-600 mr-3" />}
-                      <span className="font-medium">{method}</span>
+                  {["Credit Card", "Visa", "MasterCard", "PayPal", "Bank Transfer"].map(method => (
+                    <div
+                      key={method}
+                      className={`flex items-center justify-between p-4 border rounded-xl cursor-pointer transition ${paymentMethod === method ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:bg-gray-50"}`}
+                      onClick={() => setPaymentMethod(method)}
+                    >
+                      <div className="flex items-center gap-3">
+                        {method === "Credit Card" && <CreditCardIcon className="w-6 h-6 text-blue-600" />}
+                        {["Visa","MasterCard","PayPal"].includes(method) && <img src={paymentLogos[method]} alt={method} className="w-10 h-6" />}
+                        {method === "Bank Transfer" && <BanknotesIcon className="w-6 h-6 text-green-600" />}
+                        <span className="font-medium">{method}</span>
+                      </div>
                     </div>
                   ))}
                 </div>
               )}
             </div>
+
+            {/* --- Related Products --- */}
+            <div className="mt-6">
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">You might also like</h3>
+              <div className="flex gap-4 overflow-x-auto pb-2">
+                {relatedProducts.map(p => (
+                  <div key={p.id} className="min-w-[150px] bg-white shadow rounded-xl p-2 hover:shadow-2xl transition cursor-pointer">
+                    <img src={p.image} alt={p.name} className="w-full h-24 object-cover rounded-md mb-2" />
+                    <p className="text-sm font-medium">{p.name}</p>
+                    <p className="text-blue-600 font-bold">${p.price}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Right Side */}
+          {/* --- Right Side: Order Summary --- */}
           <div className="bg-white rounded-3xl shadow-lg p-8 flex flex-col justify-between sticky top-24">
             <h3 className="text-2xl font-bold mb-6 text-center">Order Summary</h3>
             <div className="space-y-3">
-              <div className="flex justify-between text-gray-700"><span>Subtotal</span><span className="font-semibold">${subtotal.toFixed(2)}</span></div>
-              <div className="flex justify-between text-gray-700"><span>Tax (10%)</span><span className="font-semibold">${tax.toFixed(2)}</span></div>
-              <div className="flex justify-between text-gray-700"><span>Shipping</span><span className="font-semibold">${shippingCost.toFixed(2)}</span></div>
-              <div className="border-t border-gray-200 mt-4 pt-4 flex justify-between text-xl font-bold"><span>Total</span><span>${total.toFixed(2)}</span></div>
+              <div className="flex justify-between text-gray-700">
+                <span>Subtotal <QuestionMarkCircleIcon className="w-4 h-4 inline-block" title="Sum of all items" /></span>
+                <span className="font-semibold">${subtotal.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-gray-700">
+                <span>Tax (10%) <QuestionMarkCircleIcon className="w-4 h-4 inline-block" title="Applicable taxes" /></span>
+                <span className="font-semibold">${tax.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-gray-700">
+                <span>Shipping <QuestionMarkCircleIcon className="w-4 h-4 inline-block" title="Flat shipping fee" /></span>
+                <span className="font-semibold">${shippingCost.toFixed(2)}</span>
+              </div>
+              <div className="border-t border-gray-200 mt-4 pt-4 flex justify-between text-xl font-bold">
+                <span>Total</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
             </div>
             <button className="mt-8 bg-gradient-to-r from-blue-500 to-blue-700 text-white py-4 rounded-2xl font-bold text-lg hover:scale-105 transform transition shadow-lg hover:shadow-2xl animate-bounce">
               Proceed to Checkout
