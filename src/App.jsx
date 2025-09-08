@@ -144,10 +144,72 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
         </Routes>
 
-        {/* Footer */}
-        <footer className="bg-gray-900 text-white mt-20 pt-16">
-          {/* Footer content ... */}
-        </footer>
+        {/* --- Footer Section --- */}
+<footer className="bg-gray-900 text-gray-300 mt-20 pt-16">
+  <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10 pb-10">
+    {/* --- Brand --- */}
+    <div>
+      <h2 className="text-2xl font-bold text-white mb-4">TechEcommerce</h2>
+      <p className="text-sm leading-relaxed">
+        Your trusted tech store for gadgets, gaming gear, and accessories.
+      </p>
+      <div className="flex space-x-4 mt-4">
+        <a href="https://github.com/madandev02" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition">
+          <i className="fab fa-github text-2xl"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/tu-linkedin" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition">
+          <i className="fab fa-linkedin text-2xl"></i>
+        </a>
+        <a href="https://twitter.com/" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition">
+          <i className="fab fa-twitter text-2xl"></i>
+        </a>
+      </div>
+    </div>
+
+    {/* --- Quick Links --- */}
+    <div>
+      <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
+      <ul className="space-y-2 text-sm">
+        <li><a href="/" className="hover:text-blue-400 transition">Home</a></li>
+        <li><a href="/products" className="hover:text-blue-400 transition">Products</a></li>
+        <li><a href="/about" className="hover:text-blue-400 transition">About Us</a></li>
+        <li><a href="/contact" className="hover:text-blue-400 transition">Contact</a></li>
+      </ul>
+    </div>
+
+    {/* --- Customer Service --- */}
+    <div>
+      <h3 className="text-lg font-semibold text-white mb-4">Customer Service</h3>
+      <ul className="space-y-2 text-sm">
+        <li><a href="/faq" className="hover:text-blue-400 transition">FAQ</a></li>
+        <li><a href="/returns" className="hover:text-blue-400 transition">Returns</a></li>
+        <li><a href="/shipping" className="hover:text-blue-400 transition">Shipping Info</a></li>
+        <li><a href="/privacy" className="hover:text-blue-400 transition">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    {/* --- Newsletter --- */}
+    <div>
+      <h3 className="text-lg font-semibold text-white mb-4">Stay Updated</h3>
+      <p className="text-sm mb-3">Subscribe to our newsletter and never miss our deals!</p>
+      <form className="flex">
+        <input
+          type="email"
+          placeholder="Enter your email"
+          className="w-full px-3 py-2 rounded-l-md focus:outline-none text-gray-900"
+        />
+        <button type="submit" className="bg-blue-600 px-4 py-2 rounded-r-md hover:bg-blue-700 transition">
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </div>
+
+  {/* --- Bottom Footer --- */}
+  <div className="border-t border-gray-700 py-6 text-center text-sm text-gray-400">
+    © {new Date().getFullYear()} TechEcommerce. All rights reserved.
+  </div>
+</footer>
       </div>
     </div>
   );

@@ -1,16 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-// Categories Data - Added more categories
+// Categories Data
 const categories = [
-  { name: 'Laptops', image: '/src/assets/laptops.jpg' },
-  { name: 'Smartphones', image: '/src/assets/smartphones.jpg' },
-  { name: 'Accessories', image: '/src/assets/accessories.jpg' },
-  { name: 'Wearables', image: '/src/assets/wearables.jpg' },
-  { name: 'Gaming', image: '/src/assets/gaming.jpg' },
-  { name: 'Cameras', image: '/src/assets/cameras.jpg' },
-  { name: 'Audio', image: '/src/assets/audio.jpg' },
-  { name: 'Smart Home', image: '/src/assets/smarthome.jpg' },
+  { name: "Laptops", image: "/assets/laptops.jpg" },
+  { name: "Smartphones", image: "/assets/smartphones.jpg" },
+  { name: "Accessories", image: "/assets/accessories.jpg" },
+  { name: "Wearables", image: "/assets/wearables.jpg" },
+  { name: "Gaming", image: "/assets/gaming.jpg" },
+  { name: "Cameras", image: "/assets/cameras.jpg" },
+  { name: "Audio", image: "/assets/audio.jpg" },
+  { name: "Smart Home", image: "/assets/smarthome.jpg" },
 ];
 
 const Categories = () => {
@@ -22,25 +22,26 @@ const Categories = () => {
       </h2>
 
       {/* Grid of categories */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
         {categories.map((cat, i) => (
           <Link
             key={i}
             to={`/categories/${cat.name.toLowerCase()}`}
-            className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 transition-all duration-500 cursor-pointer flex flex-col items-center"
+            className="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-500"
           >
-            {/* Image Container */}
-            <div className="relative w-full h-36 sm:h-40 flex items-center justify-center bg-gray-50">
-              <img
-                src={cat.image}
-                alt={cat.name}
-                className="w-20 h-20 sm:w-24 sm:h-24 object-contain transition-transform duration-500 group-hover:scale-110"
-              />
-            </div>
+            {/* Background Image */}
+            <img
+              src={cat.image}
+              alt={cat.name}
+              className="w-full h-48 sm:h-56 object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+
+            {/* Dark overlay for better text readability */}
+            <div className="absolute inset-0 bg-black/70 group-hover:bg-black/50 transition duration-500"></div>
 
             {/* Category Name */}
-            <div className="p-3 sm:p-4 text-center">
-              <h3 className="text-sm sm:text-base font-medium text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <h3 className="text-lg sm:text-xl font-extrabold text-white drop-shadow-[0_0_10px_rgba(0,0,0,0.7)] transform group-hover:scale-110 group-hover:text-blue-500 transition duration-500">
                 {cat.name}
               </h3>
             </div>

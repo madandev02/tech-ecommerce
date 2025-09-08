@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = ({ setNavbarHeight }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(2);
+  const [cartCount, setCartCount] = useState(3);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [showNav, setShowNav] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -26,7 +26,7 @@ const Navbar = ({ setNavbarHeight }) => {
     { name: "Smart Home", icon: "🏠" },
   ];
 
-  // Cerrar dropdown al click fuera
+  // Dropdown
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -37,7 +37,7 @@ const Navbar = ({ setNavbarHeight }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Hide/show navbar al hacer scroll
+  // navbar hide on scroll
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY && window.scrollY > 50) {
@@ -51,7 +51,7 @@ const Navbar = ({ setNavbarHeight }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Calcular altura del navbar al montar
+  // navbar height
   useLayoutEffect(() => {
     if (navRef.current) {
       setNavbarHeight(navRef.current.offsetHeight);
