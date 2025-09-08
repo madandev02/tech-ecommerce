@@ -207,7 +207,7 @@ const App = () => {
 
   {/* --- Bottom Footer --- */}
   <div className="border-t border-gray-700 py-6 text-center text-sm text-gray-400">
-    © {new Date().getFullYear()} TechEcommerce. All rights reserved.
+    © {new Date().getFullYear()} TechEcommerce. Make with love by Madandev.
   </div>
 </footer>
       </div>
