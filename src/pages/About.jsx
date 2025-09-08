@@ -2,10 +2,10 @@ import React from "react";
 import { AcademicCapIcon, EyeIcon, UsersIcon } from "@heroicons/react/24/solid";
 
 const teamMembers = [
-  { name: "Alice Johnson", role: "CEO", image: "https://via.placeholder.com/100" },
-  { name: "Bob Smith", role: "CTO", image: "https://via.placeholder.com/100" },
-  { name: "Clara Lee", role: "Head of Marketing", image: "https://via.placeholder.com/100" },
-  { name: "David Brown", role: "Lead Developer", image: "https://via.placeholder.com/100" },
+  { name: "Alice Johnson", role: "CEO", image: "https://www.shutterstock.com/image-photo/confident-smiling-middle-aged-business-600nw-2451544833.jpg" },
+  { name: "Bob Smith", role: "CTO", image: "https://static.vecteezy.com/system/resources/thumbnails/038/025/202/small_2x/ai-generated-medium-shot-of-confident-mixed-race-man-wearing-elegant-suit-looking-at-camera-on-white-background-photo.jpg" },
+  { name: "Clara Lee", role: "Head of Marketing", image: "https://images.unsplash.com/photo-1616325629936-99a9013c29c6?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YXNpYW4lMjB3b21hbnxlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "David Brown", role: "Lead Developer", image: "https://www.shutterstock.com/image-photo/smiling-busy-young-latin-business-600nw-2392837517.jpg" },
 ];
 
 const About = () => {
@@ -93,7 +93,7 @@ const About = () => {
               "TechStore made upgrading my setup so easy! Great products and service."
             </p>
             <div className="flex items-center gap-4">
-              <img src="https://via.placeholder.com/50" alt="Client 1" className="w-12 h-12 rounded-full" />
+              <img src="https://st.depositphotos.com/1003989/4006/i/450/depositphotos_40064511-stock-photo-call-center-operator.jpg" alt="Client 1" className="w-12 h-12 rounded-full" />
               <div>
                 <p className="font-semibold text-gray-800">Emily R.</p>
                 <p className="text-yellow-400">⭐⭐⭐⭐⭐</p>
@@ -106,7 +106,7 @@ const About = () => {
               "Fast delivery and excellent customer support. Highly recommended!"
             </p>
             <div className="flex items-center gap-4">
-              <img src="https://via.placeholder.com/50" alt="Client 2" className="w-12 h-12 rounded-full" />
+              <img src="https://img.freepik.com/free-photo/smiling-man-sitting-cafe-table-gesturing_1262-1141.jpg?semt=ais_hybrid&w=740&q=80" alt="Client 2" className="w-12 h-12 rounded-full" />
               <div>
                 <p className="font-semibold text-gray-800">Michael T.</p>
                 <p className="text-yellow-400">⭐⭐⭐⭐⭐</p>

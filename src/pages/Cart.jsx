@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import {
   XMarkIcon, PlusIcon, MinusIcon, ChevronDownIcon,
-  CreditCardIcon, BanknotesIcon, CurrencyDollarIcon,
-  FireIcon, ClockIcon, ArrowPathIcon, QuestionMarkCircleIcon
+  CreditCardIcon, BanknotesIcon, QuestionMarkCircleIcon,
+  FireIcon, ClockIcon
 } from "@heroicons/react/24/outline";
 
-// --- Sample related products for recommendation ---
+// Related products
 const relatedProducts = [
-  { id: 101, name: "Gaming Mouse", price: 49, image: "https://via.placeholder.com/150x100" },
-  { id: 102, name: "RGB Mousepad", price: 29, image: "https://via.placeholder.com/150x100" },
-  { id: 103, name: "Gaming Chair", price: 199, image: "https://via.placeholder.com/150x100" }
+  { id: 101, name: "Gaming Mouse", price: 49, image: "https://www.centec.cl/cdn/shop/files/pixelcut-export__2831_2920240524-24908-zkwvoi_1800x.png?v=1737574381" },
+  { id: 102, name: "RGB Mousepad", price: 29, image: "https://fernapetcl.vtexassets.com/arquivos/ids/181045/782529.jpg?v=637683767443770000" },
+  { id: 103, name: "Gaming Chair", price: 199, image: "https://m.media-amazon.com/images/I/51UCZe3chZS._AC_SL1000_.jpg" }
 ];
 
-// --- Payment logos ---
+// Payment logos
 const paymentLogos = {
   "Visa": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg",
   "MasterCard": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg",
@@ -20,21 +20,18 @@ const paymentLogos = {
 };
 
 const CartPage = () => {
-  // --- Cart state ---
   const [cartItems, setCartItems] = useState([
-    { id: 1, name: "Gaming Laptop", price: 1200, quantity: 1, images: ["https://via.placeholder.com/200x150", "https://via.placeholder.com/200x150/ff0000"], stock: 5, discount: 10, hotDeal: true },
-    { id: 2, name: "Wireless Headset", price: 150, quantity: 2, images: ["https://via.placeholder.com/200x150"], stock: 10 },
-    { id: 3, name: "Mechanical Keyboard", price: 99, quantity: 1, images: ["https://via.placeholder.com/200x150"], stock: 3, discount: 5 },
+    { id: 1, name: "Gaming Laptop", price: 1200, quantity: 1, images: ["https://www.asus.com/media/Odin/Websites/global/ProductLine/20200824120814.jpg", "https://mrclick.cl/cdn/shop/files/003_1500x1500_8_bb1c76dd-b367-4784-b4f5-bb5fa0323ef1_1200x1200.jpg?v=1739815996"], stock: 5, discount: 10, hotDeal: true },
+    { id: 2, name: "Wireless Headset", price: 150, quantity: 2, images: ["https://i5.walmartimages.com/seo/Microsoft-Xbox-Wireless-Headset-for-Xbox-Series-X-S-Xbox-One-and-Windows-10-Devices_64253c60-9ccc-411b-a86b-99d699b94a2d.4844244c7e9e50a3752dcec3c3b6edc8.jpeg"], stock: 10 },
+    { id: 3, name: "Mechanical Keyboard", price: 99, quantity: 1, images: ["https://m.media-amazon.com/images/I/71ZRus2YNcL._AC_UF894,1000_QL80_.jpg"], stock: 3, discount: 5 },
   ]);
 
-  // --- Shipping & payment states ---
   const [shipping, setShipping] = useState({ name: "", address: "", city: "", postalCode: "", country: "" });
   const [paymentMethod, setPaymentMethod] = useState("Credit Card");
   const [showShipping, setShowShipping] = useState(true);
   const [showPayment, setShowPayment] = useState(false);
   const [hoveredImage, setHoveredImage] = useState({});
-  
-  // --- Handle quantity changes with animation ---
+
   const handleQuantityChange = (id, delta) => {
     setCartItems(prev =>
       prev.map(item =>
@@ -43,7 +40,6 @@ const CartPage = () => {
     );
   };
 
-  // --- Remove item with fade animation ---
   const handleRemoveItem = (id) => {
     const element = document.getElementById(`cart-item-${id}`);
     if(element){
@@ -52,7 +48,6 @@ const CartPage = () => {
     }
   };
 
-  // --- Calculate totals ---
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity * ((100 - (item.discount || 0)) / 100),
     0
@@ -61,76 +56,69 @@ const CartPage = () => {
   const shippingCost = cartItems.length ? 15 : 0;
   const total = subtotal + tax + shippingCost;
 
-  // --- Handle shipping input change ---
   const handleShippingChange = (e) => setShipping({ ...shipping, [e.target.name]: e.target.value });
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12 font-sans">
-      {/* --- Page Title --- */}
       <h2 className="text-4xl font-extrabold text-gray-800 mb-10 text-center">🛒 Shopping Cart</h2>
 
       {cartItems.length === 0 ? (
         <p className="text-center text-gray-500 text-lg">Your cart is empty.</p>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* --- Left Side: Cart Items, Shipping & Payment --- */}
           <div className="lg:col-span-2 space-y-6">
             {cartItems.map(item => (
               <div
                 id={`cart-item-${item.id}`}
                 key={item.id}
-                className="flex items-center bg-white rounded-3xl shadow-lg p-4 hover:shadow-2xl transition relative group overflow-hidden transform hover:scale-[1.02]"
-                onMouseEnter={() => setHoveredImage({ ...hoveredImage, [item.id]: 1 })}
-                onMouseLeave={() => setHoveredImage({ ...hoveredImage, [item.id]: 0 })}
+                className="flex items-center bg-white rounded-3xl shadow-lg p-4 hover:shadow-2xl transition relative overflow-hidden transform hover:scale-[1.02] group"
               >
-                {/* --- Discount Badge --- */}
+                {/* Discount Badge */}
                 {item.discount && (
-                  <span className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg animate-pulse">-{item.discount}%</span>
+                  <span className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg z-10">{`-${item.discount}%`}</span>
                 )}
-                {/* --- Hot Deal Badge --- */}
+                {/* Hot Deal Badge */}
                 {item.hotDeal && (
-                  <span className="absolute top-3 left-24 bg-yellow-400 text-white px-2 py-1 rounded-full text-sm font-bold flex items-center gap-1">
+                  <span className="absolute top-3 left-24 bg-yellow-400 text-white px-2 py-1 rounded-full text-sm font-bold flex items-center gap-1 z-10">
                     <FireIcon className="w-4 h-4" /> Hot Deal
                   </span>
                 )}
-                {/* --- Stock Badge --- */}
-                <span className="absolute top-3 right-3 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+                {/* Stock Badge */}
+                <span className="absolute top-3 right-3 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg z-10">
                   {item.quantity}x / {item.stock} in stock
                 </span>
 
-                {/* --- Product Images with mini gallery --- */}
-                <div className="w-28 h-28 overflow-hidden rounded-xl shadow-sm relative">
+                {/* Product Images */}
+                <div className="w-28 h-28 overflow-hidden rounded-xl shadow-sm relative flex-shrink-0">
                   <img
                     src={item.images[hoveredImage[item.id] || 0]}
                     alt={item.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
                   />
                   {item.images.length > 1 && (
-                    <div className="absolute bottom-1 left-1 flex gap-1">
+                    <div className="absolute bottom-1 left-1 flex gap-1 z-20">
                       {item.images.map((img, idx) => (
                         <div
                           key={idx}
                           onMouseEnter={() => setHoveredImage({ ...hoveredImage, [item.id]: idx })}
-                          className={`w-6 h-6 border rounded cursor-pointer ${hoveredImage[item.id] === idx ? "border-blue-500" : "border-gray-300"}`}
-                          style={{ backgroundImage: `url(${img})`, backgroundSize: 'cover' }}
+                          className={`w-6 h-6 border-2 rounded cursor-pointer ${hoveredImage[item.id] === idx ? "border-blue-500" : "border-gray-300"}`}
+                          style={{ backgroundImage: `url(${img})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                         />
                       ))}
                     </div>
                   )}
                 </div>
 
-                {/* --- Product Info --- */}
-                <div className="ml-5 flex-1">
-                  <h3 className="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition">{item.name}</h3>
-                  <div className="flex items-center gap-1">
-                    <p className="text-blue-600 font-bold text-lg mt-1">
+                {/* Product Info */}
+                <div className="ml-5 flex-1 min-w-0">
+                  <h3 className="text-xl font-semibold text-gray-800 truncate group-hover:text-blue-600 transition">{item.name}</h3>
+                  <div className="flex items-center gap-1 mt-1">
+                    <p className="text-blue-600 font-bold text-lg">
                       ${(item.price * ((100 - (item.discount || 0)) / 100)).toFixed(2)}
                     </p>
-                    {item.discount && (
-                      <QuestionMarkCircleIcon className="w-5 h-5 text-gray-400 cursor-pointer" title="Discount applied!" />
-                    )}
+                    {item.discount && <QuestionMarkCircleIcon className="w-5 h-5 text-gray-400 cursor-pointer" title="Discount applied!" />}
                   </div>
-                  {/* --- Quantity Controls --- */}
+                  {/* Quantity Controls */}
                   <div className="flex items-center mt-3 space-x-3">
                     <button onClick={() => handleQuantityChange(item.id, -1)} className="w-9 h-9 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition transform hover:scale-110">
                       <MinusIcon className="w-5 h-5 text-gray-700" />
@@ -142,14 +130,14 @@ const CartPage = () => {
                   </div>
                 </div>
 
-                {/* --- Remove Item Button --- */}
-                <button onClick={() => handleRemoveItem(item.id)} className="ml-4 p-2 text-gray-500 hover:text-red-500 transition transform hover:scale-110">
+                {/* Remove Item */}
+                <button onClick={() => handleRemoveItem(item.id)} className="ml-4 p-2 text-gray-500 hover:text-red-500 transition transform hover:scale-110 flex-shrink-0">
                   <XMarkIcon className="w-6 h-6" />
                 </button>
               </div>
             ))}
 
-            {/* --- Shipping Dropdown --- */}
+            {/* Shipping */}
             <div className="bg-white p-6 rounded-3xl shadow-lg hover:shadow-2xl transition">
               <div className="flex justify-between items-center cursor-pointer" onClick={() => setShowShipping(!showShipping)}>
                 <h3 className="text-2xl font-bold mb-2 text-blue-600 flex items-center gap-2"><ClockIcon className="w-5 h-5 text-blue-600" /> Shipping Address</h3>
@@ -173,7 +161,7 @@ const CartPage = () => {
               )}
             </div>
 
-            {/* --- Payment Dropdown with logos --- */}
+            {/* Payment */}
             <div className="bg-white p-6 rounded-3xl shadow-lg hover:shadow-2xl transition">
               <div className="flex justify-between items-center cursor-pointer" onClick={() => setShowPayment(!showPayment)}>
                 <h3 className="text-2xl font-bold mb-2 text-blue-600 flex items-center gap-2"><CreditCardIcon className="w-5 h-5 text-blue-600" /> Payment Method</h3>
@@ -189,7 +177,7 @@ const CartPage = () => {
                     >
                       <div className="flex items-center gap-3">
                         {method === "Credit Card" && <CreditCardIcon className="w-6 h-6 text-blue-600" />}
-                        {["Visa","MasterCard","PayPal"].includes(method) && <img src={paymentLogos[method]} alt={method} className="w-10 h-6" />}
+                        {["Visa","MasterCard","PayPal"].includes(method) && <img src={paymentLogos[method]} alt={method} className="w-10 h-6 object-contain" />}
                         {method === "Bank Transfer" && <BanknotesIcon className="w-6 h-6 text-green-600" />}
                         <span className="font-medium">{method}</span>
                       </div>
@@ -199,14 +187,14 @@ const CartPage = () => {
               )}
             </div>
 
-            {/* --- Related Products --- */}
+            {/* Related Products */}
             <div className="mt-6">
               <h3 className="text-2xl font-bold text-gray-800 mb-4">You might also like</h3>
               <div className="flex gap-4 overflow-x-auto pb-2">
                 {relatedProducts.map(p => (
-                  <div key={p.id} className="min-w-[150px] bg-white shadow rounded-xl p-2 hover:shadow-2xl transition cursor-pointer">
-                    <img src={p.image} alt={p.name} className="w-full h-24 object-cover rounded-md mb-2" />
-                    <p className="text-sm font-medium">{p.name}</p>
+                  <div key={p.id} className="min-w-[150px] bg-white shadow rounded-xl p-2 hover:shadow-2xl transition cursor-pointer flex-shrink-0">
+                    <img src={p.image} alt={p.name} className="w-full h-24 object-contain rounded-md mb-2" />
+                    <p className="text-sm font-medium truncate">{p.name}</p>
                     <p className="text-blue-600 font-bold">${p.price}</p>
                   </div>
                 ))}
@@ -214,7 +202,7 @@ const CartPage = () => {
             </div>
           </div>
 
-          {/* --- Right Side: Order Summary --- */}
+          {/* Order Summary */}
           <div className="bg-white rounded-3xl shadow-lg p-8 flex flex-col justify-between sticky top-24">
             <h3 className="text-2xl font-bold mb-6 text-center">Order Summary</h3>
             <div className="space-y-3">
